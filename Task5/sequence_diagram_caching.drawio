@@ -1,0 +1,196 @@
+<mxfile host="65bd71144e">
+    <diagram name="SequenceDiagram" id="seq-caching">
+        <mxGraphModel dx="1511" dy="646" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1300" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Оператор" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="40" width="100" height="1230" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;" parent="2" vertex="1">
+                    <mxGeometry x="45" y="110" width="10" height="1100" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="MES Frontend" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="40" width="100" height="1230" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;" parent="4" vertex="1">
+                    <mxGeometry x="45" y="110" width="10" height="1100" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="MES API" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f9f3e3;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="40" width="100" height="1230" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;" parent="6" vertex="1">
+                    <mxGeometry x="45" y="110" width="10" height="1100" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Redis Cache" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="40" width="100" height="1230" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;" parent="8" vertex="1">
+                    <mxGeometry x="45" y="110" width="10" height="1100" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="MES DB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="40" width="100" height="1230" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;" parent="10" vertex="1">
+                    <mxGeometry x="45" y="110" width="10" height="1100" as="geometry"/>
+                </mxCell>
+                <mxCell id="s1-label" value="Сценарий 1. Чтение списка заказов (Cache Hit)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="110" width="440" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="s1-1" value="открытие страницы заказов со статусом manufacturing_approved" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="135" y="170" as="sourcePoint"/>
+                        <mxPoint x="285" y="170" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s1-2" value="GET /api/orders?status=manufacturing_approved&amp;page=1" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="295" y="210" as="sourcePoint"/>
+                        <mxPoint x="445" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s1-3" value="GET orders:list:manufacturing_approved:1:20" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="455" y="250" as="sourcePoint"/>
+                        <mxPoint x="605" y="250" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s1-4" value="Cache Hit: данные списка заказов" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="605" y="290" as="sourcePoint"/>
+                        <mxPoint x="455" y="290" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s1-5" value="Список заказов (из кеша)" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="445" y="330" as="sourcePoint"/>
+                        <mxPoint x="295" y="330" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s1-6" value="Отображение списка заказов" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="285" y="370" as="sourcePoint"/>
+                        <mxPoint x="135" y="370" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-label" value="Сценарий 2. Чтение списка заказов (Cache Miss)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="410" width="440" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="s2-1" value="открытие страницы заказов со статусом manufacturing_approved" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="135" y="470" as="sourcePoint"/>
+                        <mxPoint x="285" y="470" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-2" value="GET /api/orders?status=manufacturing_approved&amp;page=1" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="295" y="510" as="sourcePoint"/>
+                        <mxPoint x="445" y="510" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-3" value="GET orders:list:manufacturing_approved:1:20" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="455" y="550" as="sourcePoint"/>
+                        <mxPoint x="605" y="550" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-4" value="Cache Miss" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="605" y="590" as="sourcePoint"/>
+                        <mxPoint x="455" y="590" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-5" value="SELECT * FROM orders WHERE status=&#39;manufacturing_approved&#39; ORDER BY created_at DESC LIMIT 20" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="455" y="630" as="sourcePoint"/>
+                        <mxPoint x="765" y="630" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-6" value="Результат запроса" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="765" y="670" as="sourcePoint"/>
+                        <mxPoint x="455" y="670" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-7" value="SET orders:list:manufacturing_approved:1:20 &quot;&amp;lt;JSON&amp;gt;&quot; EX 300" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="455" y="710" as="sourcePoint"/>
+                        <mxPoint x="605" y="710" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-8" value="OK" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="605" y="750" as="sourcePoint"/>
+                        <mxPoint x="455" y="750" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-9" value="Список заказов (из БД)" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="445" y="790" as="sourcePoint"/>
+                        <mxPoint x="295" y="790" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s2-10" value="Отображение списка заказов" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="285" y="830" as="sourcePoint"/>
+                        <mxPoint x="135" y="830" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s3-label" value="Сценарий 3. Изменение статуса заказа с инвалидацией кеша" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="870" width="500" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="s3-1" value="нажатие кнопки «Взять в работу»" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="135" y="930" as="sourcePoint"/>
+                        <mxPoint x="285" y="930" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s3-2" value="PATCH /api/orders/{id}/status" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="295" y="970" as="sourcePoint"/>
+                        <mxPoint x="445" y="970" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s3-3" value="UPDATE orders SET status=&#39;manufacturing_started&#39; WHERE id={id}" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="455" y="1010" as="sourcePoint"/>
+                        <mxPoint x="765" y="1010" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s3-4" value="OK" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="765" y="1050" as="sourcePoint"/>
+                        <mxPoint x="455" y="1050" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s3-5" value="SCAN + UNLINK orders:list:manufacturing_approved:*&#xa;SCAN + UNLINK orders:list:manufacturing_started:*" style="html=1;rounded=0;verticalAlign=bottom;endArrow=block;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="455" y="1090" as="sourcePoint"/>
+                        <mxPoint x="605" y="1090" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s3-6" value="OK (кеш инвалидирован)" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="605" y="1130" as="sourcePoint"/>
+                        <mxPoint x="455" y="1130" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s3-7" value="Статус обновлён" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="445" y="1170" as="sourcePoint"/>
+                        <mxPoint x="295" y="1170" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="s3-8" value="Обновление интерфейса" style="html=1;rounded=0;verticalAlign=bottom;endArrow=open;endSize=8;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="285" y="1210" as="sourcePoint"/>
+                        <mxPoint x="135" y="1210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="legend" value="Легенда:&lt;br&gt;— Запрос&lt;br&gt;- - - Ответ&lt;br&gt;&lt;br&gt;Участники:&lt;br&gt;Оператор / MES Frontend / MES API / Redis Cache / MES DB&lt;br&gt;&lt;br&gt;Цветовая кодировка:&lt;br&gt;Синий — клиентская часть&lt;br&gt;Жёлтый — сервер приложений&lt;br&gt;Зелёный — хранилище кеша&lt;br&gt;Фиолетовый — база данных&lt;br&gt;&lt;br&gt;Ключ кеша: orders:list:{status}:{page}:{page_size}" style="text;html=1;strokeColor=#000000;fillColor=#ffffff;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="40" width="200" height="220" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
